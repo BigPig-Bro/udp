@@ -20,11 +20,12 @@ assign o_rgmii_rst_n = i_rst_n;
 localparam [47:0] P_LOCAL_MAC   = 48'h0202_DEAD_BEEF;
 localparam [31:0] P_LOCAL_IP    = {8'd192, 8'd168, 8'd1, 8'd210};
 // localparam [47:0] P_DST_MAC     = 48'h00e0_4c70_00ab; //TM1703
-localparam [47:0] P_DST_MAC     = 48'h10FF_E0F7_CEE0;
+// localparam [47:0] P_DST_MAC     = 48'h10FF_E0F7_CEE0;//Work PC
+localparam [47:0] P_DST_MAC     = 48'h00e0_4c68_0ffa;//Home PC
 localparam [31:0] P_DST_IP      = {8'd192, 8'd168, 8'd1, 8'd100};
 localparam [15:0] P_DST_PORT    = 16'd8000;
 localparam [15:0] P_SRC_PORT    = 16'd8000;
-localparam [ 4:0] P_IDELAY_TAPS = 5'd12; //U13-12 U11-16 
+localparam [ 4:0] P_IDELAY_TAPS = 5'd20; //XI050CD-12 XI050AB-20
 localparam        P_UART_CLK    = 125_000_000;
 localparam        P_UART_BAUD   = 115200;
 

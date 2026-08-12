@@ -1,6 +1,6 @@
 // GMII TX — 流水线打拍 + 前导/SFD/数据/CRC32（无RAM）
-// V1.0.0
-//
+// 260812 V1.0.0 初始版本
+//        V1.0.1 修正数据计数器data_cnt位宽，导致最小帧填充错误
 module gmii_tx (
     input                               i_sys_clk,
     input                               i_rst_n,
@@ -27,7 +27,7 @@ logic [ 3:0]                    pre_cnt;
 logic [ 3:0]                    fcs_cnt;
 logic [31:0]                    crc_reg;
 logic [31:0]                    fcs_val;
-logic [ 7:0]                    data_cnt;  //注意最小帧填充, 数据低于18个字符的填0
+logic [11:0]                    data_cnt;  //注意最小帧填充, 数据低于18个字符的填0
 
 function automatic [31:0] crc32(input [31:0] crc, input [7:0] d);
     logic [31:0] c;
@@ -74,14 +74,14 @@ always_ff @(posedge i_sys_clk) begin
                 pre_cnt <= pre_cnt + 4'd1;
                 if (pre_cnt == 4'd7) begin
                     // 下一拍进入数据阶段
-                    data_cnt <= 8'd0;
+                    data_cnt <= 11'd0;
                     state <= S_DATA;
                 end
             end
 
             S_DATA: begin
                 crc_reg  <= crc32(crc_reg, pipe_d[8]);
-                data_cnt <= data_cnt + 8'd1;
+                data_cnt <= data_cnt + 11'd1;
 
                 if (pipe_v[8]) begin
                     o_tx_en   <= 1'b1;
@@ -91,18 +91,18 @@ always_ff @(posedge i_sys_clk) begin
                 if (pipe_l[8]) begin
                     fcs_val <= ~crc32(crc_reg, pipe_d[8]);
                     fcs_cnt <= 4'd0;
-                    state   <= (data_cnt < 8'd59) ? S_ZERO : S_FCS;
+                    state   <= (data_cnt < 11'd59) ? S_ZERO : S_FCS;
                 end
             end
 
             S_ZERO: begin
                 crc_reg  <= crc32(crc_reg, 8'h00);
-                data_cnt <= data_cnt + 8'd1;
+                data_cnt <= data_cnt + 11'd1;
 
                 o_tx_en   <= 1'b1;
                 o_tx_data <= 8'h00;
 
-                if (data_cnt == 8'd59) begin
+                if (data_cnt == 11'd59) begin
                     fcs_val <= ~crc32(crc_reg, 8'h00);
                     fcs_cnt <= 4'd0;
                     state   <= S_FCS;

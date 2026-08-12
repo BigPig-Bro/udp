@@ -1,6 +1,6 @@
 // TEST TOP — UDP 数据包生成器（模式0=空闲, 1=1pps, 2=满带宽）
-// V1.0.0
-//
+//260812 V1.0.0 初始版本
+//       V1.0.1 修订TIMER_1S定义
 module test_top #(
     parameter [47:0] P_LOCAL_MAC   = 48'hDEAD_BEEF_0001,
     parameter [31:0] P_LOCAL_IP    = {8'd192, 8'd168, 8'd1, 8'd100},
@@ -26,7 +26,7 @@ localparam [15:0] P_PAYLOAD_LEN = 16'd1024;
 localparam        PKT_LEN  = 16'd14 + 16'd20 + 16'd8 + P_PAYLOAD_LEN;
 localparam        IP_LEN   =          16'd20 + 16'd8 + P_PAYLOAD_LEN;
 localparam        UDP_LEN  =                   16'd8 + P_PAYLOAD_LEN;
-localparam        TIMER_1S = 28'd125_000_000;
+localparam        TIMER_1S = P_UART_CLK;
 localparam        WAIT_CYC = 12'd32;
 /////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////                 状态定义                /////////////////////////////

@@ -7,7 +7,7 @@ module test_top #(
     parameter [47:0] P_DST_MAC     = 48'hFFFF_FFFF_FFFF,
     parameter [31:0] P_DST_IP      = {8'd192, 8'd168, 8'd1, 8'd101},
     parameter [15:0] P_DST_PORT    = 16'd5001,
-    parameter [15:0] P_SRC_PORT    = 16'd5000,
+    parameter [15:0] P_LOCAL_PORT  = 16'd5000,
     parameter P_UART_CLK      = 25_000_000,
     parameter P_UART_BAUD     = 115200
 ) (
@@ -101,8 +101,8 @@ function automatic [7:0] gen_byte (input [15:0] cnt);begin
         31: gen_byte = P_DST_IP[23:16];
         32: gen_byte = P_DST_IP[15:8];
         33: gen_byte = P_DST_IP[7:0];
-        34: gen_byte = P_SRC_PORT[15:8];
-        35: gen_byte = P_SRC_PORT[7:0];
+        34: gen_byte = P_LOCAL_PORT[15:8];
+        35: gen_byte = P_LOCAL_PORT[7:0];
         36: gen_byte = P_DST_PORT[15:8];
         37: gen_byte = P_DST_PORT[7:0];
         38: gen_byte = UDP_LEN[15:8];

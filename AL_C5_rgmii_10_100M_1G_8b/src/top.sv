@@ -1,8 +1,10 @@
-// RGMII 千兆以太网核 — V1.0.0
+// RGMII 千兆以太网核
+//260812    v1.0.0   初始版本
+//260821    v1.1.0   由1G版本升级为10/100/1000M三速版本
 //
 module top (
     input                               i_rst_n,
-    
+
     input                               i_rgmii_rxc,
     input                               i_rgmii_rxctl,
     input                       [ 3:0]  i_rgmii_rxd,
@@ -18,14 +20,19 @@ assign o_rgmii_rst_n = i_rst_n;
 
 localparam [47:0] P_LOCAL_MAC   = 48'h0202_DEAD_BEEF;
 localparam [31:0] P_LOCAL_IP    = {8'd192, 8'd168, 8'd1, 8'd210};
+localparam [15:0] P_LOCAL_PORT  = 16'd8000;
+
 // localparam [47:0] P_DST_MAC     = 48'h00e0_4c70_00ab; //TM1703
 // localparam [47:0] P_DST_MAC     = 48'h10FF_E0F7_CEE0;//Work PC
 localparam [47:0] P_DST_MAC     = 48'h00e0_4c68_0ffa;//Home PC
 localparam [31:0] P_DST_IP      = {8'd192, 8'd168, 8'd1, 8'd100};
 localparam [15:0] P_DST_PORT    = 16'd8000;
-localparam [15:0] P_SRC_PORT    = 16'd8000;
-localparam        P_UART_CLK    = 125_000_000;
-localparam        P_UART_BAUD   = 115200;
+
+localparam [ 1:0] P_RGMII_MODE  = 2'd0; // 0:10M 1:100M 2:1G
+localparam        P_USR_CLK     = (P_RGMII_MODE == 2'd0) ? 2_500_000 / 2 :
+                                  (P_RGMII_MODE == 2'd1) ? 25_000_000 / 2 :
+                                                           125_000_000;
+localparam        P_UART_BAUD   = 9600; //RXC频率太低分不出精确的115200
 
 logic       tx_busy;
 logic [7:0] usr_rx_data;
@@ -44,12 +51,13 @@ assign usr_in_tx_last = loop_tx_wr ? loop_tx_last : usr_tx_last;
 
 // === UDP TOP ===
 udp_top #(
-    .P_LOCAL_MAC  (P_LOCAL_MAC  ),
-    .P_LOCAL_IP   (P_LOCAL_IP   ),
-    .P_DST_MAC    (P_DST_MAC    ),
-    .P_DST_IP     (P_DST_IP     ),
-    .P_DST_PORT   (P_DST_PORT   ),
-    .P_SRC_PORT   (P_SRC_PORT   )
+    .P_LOCAL_MAC  (P_LOCAL_MAC    ),
+    .P_LOCAL_IP   (P_LOCAL_IP     ),
+    .P_LOCAL_PORT (P_LOCAL_PORT   ),
+    .P_DST_MAC    (P_DST_MAC      ),
+    .P_DST_IP     (P_DST_IP       ),
+    .P_DST_PORT   (P_DST_PORT     ),
+    .P_RGMII_MODE (P_RGMII_MODE   )
 ) udp_top_m0 (
     .i_rst_n       (i_rst_n       ),
 
@@ -72,14 +80,14 @@ udp_top #(
 
 // === TEST TOP ===
 test_top #(
-    .P_LOCAL_MAC(P_LOCAL_MAC),
-    .P_LOCAL_IP (P_LOCAL_IP ),
-    .P_DST_MAC  (P_DST_MAC  ),
-    .P_DST_IP   (P_DST_IP   ),
-    .P_DST_PORT (P_DST_PORT ),
-    .P_SRC_PORT (P_SRC_PORT ),
-    .P_UART_CLK (P_UART_CLK ),
-    .P_UART_BAUD(P_UART_BAUD)
+    .P_LOCAL_MAC (P_LOCAL_MAC ),
+    .P_LOCAL_IP  (P_LOCAL_IP  ),
+    .P_LOCAL_PORT(P_LOCAL_PORT),
+    .P_DST_MAC   (P_DST_MAC   ),
+    .P_DST_IP    (P_DST_IP    ),
+    .P_DST_PORT  (P_DST_PORT  ),
+    .P_UART_CLK  (P_USR_CLK   ),
+    .P_UART_BAUD (P_UART_BAUD )
 ) test_top_m0 (
     .i_sys_clk (usr_clk     ),
     .i_rst_n   (i_rst_n     ),

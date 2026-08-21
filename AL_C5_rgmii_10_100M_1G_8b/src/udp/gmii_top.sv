@@ -1,7 +1,10 @@
 // GMII TOP — RGMII桥接 + RX帧解码 + TX帧发送
-// V1.0.0
+//260812    v1.0.0   初始版本
+//260821    v1.1.0   由1G版本升级为10/100/1000M三速版本
 //
-module gmii_top (
+module gmii_top #(
+    parameter [ 1:0] P_RGMII_MODE    = 2'd1  // 0:10M SDR, 1:100M SDR, 2:1G DDR
+    ) (
     input                               i_rst_n,
     // RGMII 引脚
     input                               i_rgmii_rxc,
@@ -33,7 +36,9 @@ logic                           gmii_tx_en;
 /////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////          GMII ↔ RGMII 桥接            /////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
-gmii2rgmii gmii2rgmii_m0 (
+gmii2rgmii #(
+    .P_RGMII_MODE               (P_RGMII_MODE               )
+) gmii2rgmii_m0 (
     .i_rst_n                    (i_rst_n                    ),
     // ---- RGMII 引脚 ----
     .i_rgmii_rxc                (i_rgmii_rxc                ),

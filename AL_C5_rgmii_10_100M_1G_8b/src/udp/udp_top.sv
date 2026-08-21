@@ -1,5 +1,6 @@
 // UDP_TOP — RGMII 千兆以太网 + 协议栈封装
-// V1.0.0
+//260812    v1.0.0   初始版本
+//260821    v1.1.0   由1G版本升级为10/100/1000M三速版本
 //
 module udp_top #(
     parameter [47:0] P_LOCAL_MAC   = 48'h0202_DEAD_BEEF,
@@ -7,7 +8,8 @@ module udp_top #(
     parameter [47:0] P_DST_MAC     = 48'h10FF_E0F7_CEE0,
     parameter [31:0] P_DST_IP      = {8'd192, 8'd168, 8'd1, 8'd100},
     parameter [15:0] P_DST_PORT    = 16'd4000,
-    parameter [15:0] P_SRC_PORT    = 16'd5000
+    parameter [15:0] P_LOCAL_PORT  = 16'd5000,
+    parameter [ 1:0] P_RGMII_MODE  = 2'd1  // 0:10M SDR, 1:100M SDR, 2:1G DDR
 ) (
     input                               i_rst_n,
     // RGMII 引脚
@@ -17,9 +19,8 @@ module udp_top #(
     output                      [ 3:0]  o_rgmii_txd,
     output                              o_rgmii_txctl,
     output                              o_rgmii_txc,
-
-    output                              o_usr_clk,
     // RX User 数据输出（→ loop_top）
+    output                              o_usr_clk,
     output      logic           [ 7:0]  o_usr_rx_data,
     output      logic                   o_usr_rx_valid,
     output      logic                   o_usr_rx_last,
@@ -51,7 +52,9 @@ assign o_usr_rx_valid = usr_rx_valid;
 assign o_usr_rx_last  = usr_rx_last;
 
 // === GMII TOP ===
-gmii_top gmii_top_m0 (
+gmii_top #(
+    .P_RGMII_MODE (P_RGMII_MODE )
+) gmii_top_m0 (
     .i_rst_n      (i_rst_n      ),
 
     .i_rgmii_rxc  (i_rgmii_rxc  ),
@@ -139,12 +142,12 @@ tx_mux tx_mux_m0 (
     .i_icmp_data(icmp_tx_data  ),
     .i_icmp_wr  (icmp_tx_wr    ),
     .i_icmp_last(icmp_tx_last  ),
-
     .i_usr_data (i_usr_tx_data ),
+
     .i_usr_wr   (i_usr_tx_wr   ),
     .i_usr_last (i_usr_tx_last ),
-
     .i_tx_busy  (tx_busy       ),
+
     .o_tx_data  (tx_data       ),
     .o_tx_wr    (tx_wr         ),
     .o_tx_last  (tx_last       )

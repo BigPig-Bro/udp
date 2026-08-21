@@ -93,8 +93,6 @@ set_location_assignment PIN_Y9 -to o_rgmii_txd[2]
 set_location_assignment PIN_W7 -to o_rgmii_txd[3]
 
 set_global_assignment -name DEVICE_FILTER_PACKAGE UFBGA
-set_global_assignment -name ENABLE_SIGNALTAP ON
-set_global_assignment -name USE_SIGNALTAP_FILE src/stp1.stp
 set_global_assignment -name SYSTEMVERILOG_FILE src/udp/udp_top.sv
 set_global_assignment -name SYSTEMVERILOG_FILE src/udp/tx_mux.sv
 set_global_assignment -name SYSTEMVERILOG_FILE src/udp/rx_mux.sv
@@ -110,5 +108,4 @@ set_global_assignment -name SYSTEMVERILOG_FILE src/uart/uart_rx.sv
 set_global_assignment -name SYSTEMVERILOG_FILE src/top.sv
 set_global_assignment -name SYSTEMVERILOG_FILE src/test_top.sv
 set_global_assignment -name SYSTEMVERILOG_FILE src/loop_top.sv
-set_global_assignment -name SIP_FILE src/ip/rx_clk_pll.sip
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

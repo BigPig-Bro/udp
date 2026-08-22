@@ -1,6 +1,6 @@
 // GMII IO — 1G 8bit / 10/100M 4bit SDR 双模式
-// V1.0.0
-// 260822 V1.1.0 增加10/100M低4位SDR模式，P_RGMII_MODE选择
+//260812    v1.0.0   初始版本
+//260822    v1.1.0   增加10/100M低4位SDR模式，P_RGMII_MODE选择
 module gmii_io #(
     parameter [ 1:0] P_RGMII_MODE = 2'd2  // 0:10M SDR 4bit, 1:100M SDR 4bit, 2:1G 8bit
 ) (

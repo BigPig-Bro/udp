@@ -2,10 +2,10 @@
 -- Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
--- Date        : Tue Aug 18 21:38:35 2026
+-- Date        : Sat Aug 22 18:39:57 2026
 -- Host        : DESKTOP-9MNJBAS running 64-bit major release  (build 9200)
 -- Command     : write_vhdl -force -mode funcsim
---               e:/FPGA_work/Project_Git/udp/XI_K7_rgmii_1G_8b_loop/top.gen/sources_1/ip/rx_dly_pll/rx_dly_pll_sim_netlist.vhdl
+--               e:/FPGA_work/Project_Git/udp/XI_K7_rgmii_10_100M_1G_8b/top.gen/sources_1/ip/rx_dly_pll/rx_dly_pll_sim_netlist.vhdl
 -- Design      : rx_dly_pll
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.

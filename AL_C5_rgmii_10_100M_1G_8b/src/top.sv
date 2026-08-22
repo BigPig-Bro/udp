@@ -28,7 +28,7 @@ localparam [47:0] P_DST_MAC     = 48'h00e0_4c68_0ffa;//Home PC
 localparam [31:0] P_DST_IP      = {8'd192, 8'd168, 8'd1, 8'd100};
 localparam [15:0] P_DST_PORT    = 16'd8000;
 
-localparam [ 1:0] P_RGMII_MODE  = 2'd0; // 0:10M 1:100M 2:1G
+localparam [ 1:0] P_RGMII_MODE  = 2'd2; // 0:10M 1:100M 2:1G
 localparam        P_USR_CLK     = (P_RGMII_MODE == 2'd0) ? 2_500_000 / 2 :
                                   (P_RGMII_MODE == 2'd1) ? 25_000_000 / 2 :
                                                            125_000_000;

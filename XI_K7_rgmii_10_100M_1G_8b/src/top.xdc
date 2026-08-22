@@ -3,9 +3,9 @@ set_property CONFIG_VOLTAGE 3.3 [current_design]
 
 # HDU 7K325T K2
 set_property -dict { IOSTANDARD LVCMOS33 PACKAGE_PIN  V19} [get_ports {i_rst_n}]
-# HDU 7K325T UART NC
-set_property -dict { IOSTANDARD LVCMOS33 PACKAGE_PIN U27} [get_ports {i_uart_rx}]
-set_property -dict { IOSTANDARD LVCMOS33 PACKAGE_PIN U28} [get_ports {o_uart_tx}]
+# HDU 7K325T UART K4 K5飞线
+set_property -dict { IOSTANDARD LVCMOS33 PACKAGE_PIN W23} [get_ports {i_uart_rx}]
+set_property -dict { IOSTANDARD LVCMOS33 PACKAGE_PIN W24} [get_ports {o_uart_tx}]
 # HDU 7K325T 
 set_property -dict { IOSTANDARD LVCMOS33 PACKAGE_PIN  N21} [get_ports {o_rgmii_rst_n}]
 # HDU 7K325T U11

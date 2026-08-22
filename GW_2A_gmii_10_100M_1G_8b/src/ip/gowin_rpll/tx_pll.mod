@@ -1,0 +1,34 @@
+-series GW2A
+-device GW2A-18
+-device_version C
+-package PBGA256
+-part_number GW2A-LV18PG256C8/I7
+
+
+-mod_name tx_pll
+-file_name tx_pll
+-path E:/FPGA_work/Project_Git/udp/GW_2A_gmii_10_100M_1G_8b/src/ip/gowin_rpll/
+-type PLL
+-rPll true
+-file_type vlg
+-dev_type GW2A-18C
+-dyn_idiv_sel false
+-idiv_sel 1
+-dyn_fbdiv_sel false
+-fbdiv_sel 1
+-dyn_odiv_sel false
+-odiv_sel 8
+-dyn_da_en false
+-rst_sig false
+-rst_sig_p false
+-fclkin 100
+-clkfb_sel 0
+-en_lock false
+-clkout_bypass true
+-en_clkoutp true
+-clkoutp_bypass false
+-psda_sel 6
+-dutyda_sel 8
+-en_clkoutd false
+-clkoutd_bypass false
+-en_clkoutd3 false

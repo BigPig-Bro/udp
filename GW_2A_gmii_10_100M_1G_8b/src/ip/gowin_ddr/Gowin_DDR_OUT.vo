@@ -1,0 +1,241 @@
+//Copyright (C)2014-2023 Gowin Semiconductor Corporation.
+//All rights reserved.
+//File Title: Post-PnR Simulation Model file
+//GOWIN Version: V1.9.9 Beta-5
+//Created Time: Sun Aug 23 01:11:30 2026
+
+`timescale 100 ps/100 ps
+module Gowin_DDR_OUT(
+	din,
+	clk,
+	q
+);
+input [19:0] din;
+input clk;
+output [9:0] q;
+wire GND;
+wire VCC;
+wire clk;
+wire [9:0] ddr_inst_o;
+wire [19:0] din;
+wire \iodly_gen[0].iodelay_inst_1_DF ;
+wire \iodly_gen[1].iodelay_inst_1_DF ;
+wire \iodly_gen[2].iodelay_inst_1_DF ;
+wire \iodly_gen[3].iodelay_inst_1_DF ;
+wire \iodly_gen[4].iodelay_inst_1_DF ;
+wire \iodly_gen[5].iodelay_inst_1_DF ;
+wire \iodly_gen[6].iodelay_inst_1_DF ;
+wire \iodly_gen[7].iodelay_inst_1_DF ;
+wire \iodly_gen[8].iodelay_inst_1_DF ;
+wire \iodly_gen[9].iodelay_inst_1_DF ;
+wire \oddr_gen[0].oddr_inst_1_Q1 ;
+wire \oddr_gen[1].oddr_inst_1_Q1 ;
+wire \oddr_gen[2].oddr_inst_1_Q1 ;
+wire \oddr_gen[3].oddr_inst_1_Q1 ;
+wire \oddr_gen[4].oddr_inst_1_Q1 ;
+wire \oddr_gen[5].oddr_inst_1_Q1 ;
+wire \oddr_gen[6].oddr_inst_1_Q1 ;
+wire \oddr_gen[7].oddr_inst_1_Q1 ;
+wire \oddr_gen[8].oddr_inst_1_Q1 ;
+wire \oddr_gen[9].oddr_inst_1_Q1 ;
+wire [9:0] q;
+VCC VCC_cZ (
+  .V(VCC)
+);
+GND GND_cZ (
+  .G(GND)
+);
+GSR GSR (
+	.GSRI(VCC)
+);
+IODELAY \iodly_gen[0].iodelay_inst  (
+	.DI(ddr_inst_o[0]),
+	.SETN(GND),
+	.SDTAP(GND),
+	.VALUE(GND),
+	.DO(q[0]),
+	.DF(\iodly_gen[0].iodelay_inst_1_DF )
+);
+defparam \iodly_gen[0].iodelay_inst .C_STATIC_DLY=59;
+IODELAY \iodly_gen[1].iodelay_inst  (
+	.DI(ddr_inst_o[1]),
+	.SETN(GND),
+	.SDTAP(GND),
+	.VALUE(GND),
+	.DO(q[1]),
+	.DF(\iodly_gen[1].iodelay_inst_1_DF )
+);
+defparam \iodly_gen[1].iodelay_inst .C_STATIC_DLY=59;
+IODELAY \iodly_gen[2].iodelay_inst  (
+	.DI(ddr_inst_o[2]),
+	.SETN(GND),
+	.SDTAP(GND),
+	.VALUE(GND),
+	.DO(q[2]),
+	.DF(\iodly_gen[2].iodelay_inst_1_DF )
+);
+defparam \iodly_gen[2].iodelay_inst .C_STATIC_DLY=59;
+IODELAY \iodly_gen[3].iodelay_inst  (
+	.DI(ddr_inst_o[3]),
+	.SETN(GND),
+	.SDTAP(GND),
+	.VALUE(GND),
+	.DO(q[3]),
+	.DF(\iodly_gen[3].iodelay_inst_1_DF )
+);
+defparam \iodly_gen[3].iodelay_inst .C_STATIC_DLY=59;
+IODELAY \iodly_gen[4].iodelay_inst  (
+	.DI(ddr_inst_o[4]),
+	.SETN(GND),
+	.SDTAP(GND),
+	.VALUE(GND),
+	.DO(q[4]),
+	.DF(\iodly_gen[4].iodelay_inst_1_DF )
+);
+defparam \iodly_gen[4].iodelay_inst .C_STATIC_DLY=59;
+IODELAY \iodly_gen[5].iodelay_inst  (
+	.DI(ddr_inst_o[5]),
+	.SETN(GND),
+	.SDTAP(GND),
+	.VALUE(GND),
+	.DO(q[5]),
+	.DF(\iodly_gen[5].iodelay_inst_1_DF )
+);
+defparam \iodly_gen[5].iodelay_inst .C_STATIC_DLY=59;
+IODELAY \iodly_gen[6].iodelay_inst  (
+	.DI(ddr_inst_o[6]),
+	.SETN(GND),
+	.SDTAP(GND),
+	.VALUE(GND),
+	.DO(q[6]),
+	.DF(\iodly_gen[6].iodelay_inst_1_DF )
+);
+defparam \iodly_gen[6].iodelay_inst .C_STATIC_DLY=59;
+IODELAY \iodly_gen[7].iodelay_inst  (
+	.DI(ddr_inst_o[7]),
+	.SETN(GND),
+	.SDTAP(GND),
+	.VALUE(GND),
+	.DO(q[7]),
+	.DF(\iodly_gen[7].iodelay_inst_1_DF )
+);
+defparam \iodly_gen[7].iodelay_inst .C_STATIC_DLY=59;
+IODELAY \iodly_gen[8].iodelay_inst  (
+	.DI(ddr_inst_o[8]),
+	.SETN(GND),
+	.SDTAP(GND),
+	.VALUE(GND),
+	.DO(q[8]),
+	.DF(\iodly_gen[8].iodelay_inst_1_DF )
+);
+defparam \iodly_gen[8].iodelay_inst .C_STATIC_DLY=59;
+IODELAY \iodly_gen[9].iodelay_inst  (
+	.DI(ddr_inst_o[9]),
+	.SETN(GND),
+	.SDTAP(GND),
+	.VALUE(GND),
+	.DO(q[9]),
+	.DF(\iodly_gen[9].iodelay_inst_1_DF )
+);
+defparam \iodly_gen[9].iodelay_inst .C_STATIC_DLY=59;
+ODDR \oddr_gen[0].oddr_inst  (
+	.D0(din[0]),
+	.D1(din[10]),
+	.CLK(clk),
+	.TX(GND),
+	.Q0(ddr_inst_o[0]),
+	.Q1(\oddr_gen[0].oddr_inst_1_Q1 )
+);
+defparam \oddr_gen[0].oddr_inst .INIT=1'b0;
+defparam \oddr_gen[0].oddr_inst .TXCLK_POL=1'b0;
+ODDR \oddr_gen[1].oddr_inst  (
+	.D0(din[1]),
+	.D1(din[11]),
+	.CLK(clk),
+	.TX(GND),
+	.Q0(ddr_inst_o[1]),
+	.Q1(\oddr_gen[1].oddr_inst_1_Q1 )
+);
+defparam \oddr_gen[1].oddr_inst .INIT=1'b0;
+defparam \oddr_gen[1].oddr_inst .TXCLK_POL=1'b0;
+ODDR \oddr_gen[2].oddr_inst  (
+	.D0(din[2]),
+	.D1(din[12]),
+	.CLK(clk),
+	.TX(GND),
+	.Q0(ddr_inst_o[2]),
+	.Q1(\oddr_gen[2].oddr_inst_1_Q1 )
+);
+defparam \oddr_gen[2].oddr_inst .INIT=1'b0;
+defparam \oddr_gen[2].oddr_inst .TXCLK_POL=1'b0;
+ODDR \oddr_gen[3].oddr_inst  (
+	.D0(din[3]),
+	.D1(din[13]),
+	.CLK(clk),
+	.TX(GND),
+	.Q0(ddr_inst_o[3]),
+	.Q1(\oddr_gen[3].oddr_inst_1_Q1 )
+);
+defparam \oddr_gen[3].oddr_inst .INIT=1'b0;
+defparam \oddr_gen[3].oddr_inst .TXCLK_POL=1'b0;
+ODDR \oddr_gen[4].oddr_inst  (
+	.D0(din[4]),
+	.D1(din[14]),
+	.CLK(clk),
+	.TX(GND),
+	.Q0(ddr_inst_o[4]),
+	.Q1(\oddr_gen[4].oddr_inst_1_Q1 )
+);
+defparam \oddr_gen[4].oddr_inst .INIT=1'b0;
+defparam \oddr_gen[4].oddr_inst .TXCLK_POL=1'b0;
+ODDR \oddr_gen[5].oddr_inst  (
+	.D0(din[5]),
+	.D1(din[15]),
+	.CLK(clk),
+	.TX(GND),
+	.Q0(ddr_inst_o[5]),
+	.Q1(\oddr_gen[5].oddr_inst_1_Q1 )
+);
+defparam \oddr_gen[5].oddr_inst .INIT=1'b0;
+defparam \oddr_gen[5].oddr_inst .TXCLK_POL=1'b0;
+ODDR \oddr_gen[6].oddr_inst  (
+	.D0(din[6]),
+	.D1(din[16]),
+	.CLK(clk),
+	.TX(GND),
+	.Q0(ddr_inst_o[6]),
+	.Q1(\oddr_gen[6].oddr_inst_1_Q1 )
+);
+defparam \oddr_gen[6].oddr_inst .INIT=1'b0;
+defparam \oddr_gen[6].oddr_inst .TXCLK_POL=1'b0;
+ODDR \oddr_gen[7].oddr_inst  (
+	.D0(din[7]),
+	.D1(din[17]),
+	.CLK(clk),
+	.TX(GND),
+	.Q0(ddr_inst_o[7]),
+	.Q1(\oddr_gen[7].oddr_inst_1_Q1 )
+);
+defparam \oddr_gen[7].oddr_inst .INIT=1'b0;
+defparam \oddr_gen[7].oddr_inst .TXCLK_POL=1'b0;
+ODDR \oddr_gen[8].oddr_inst  (
+	.D0(din[8]),
+	.D1(din[18]),
+	.CLK(clk),
+	.TX(GND),
+	.Q0(ddr_inst_o[8]),
+	.Q1(\oddr_gen[8].oddr_inst_1_Q1 )
+);
+defparam \oddr_gen[8].oddr_inst .INIT=1'b0;
+defparam \oddr_gen[8].oddr_inst .TXCLK_POL=1'b0;
+ODDR \oddr_gen[9].oddr_inst  (
+	.D0(din[9]),
+	.D1(din[19]),
+	.CLK(clk),
+	.TX(GND),
+	.Q0(ddr_inst_o[9]),
+	.Q1(\oddr_gen[9].oddr_inst_1_Q1 )
+);
+defparam \oddr_gen[9].oddr_inst .INIT=1'b0;
+defparam \oddr_gen[9].oddr_inst .TXCLK_POL=1'b0;
+endmodule

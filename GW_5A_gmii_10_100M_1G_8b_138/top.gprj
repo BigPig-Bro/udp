@@ -5,6 +5,7 @@
     <Version>5</Version>
     <Device name="GW5AST-138B" pn="GW5AST-LV138PG484AC1/I0">gw5ast138b-011</Device>
     <FileList>
+        <File path="src/boot_rst.sv" type="file.verilog" enable="1"/>
         <File path="src/loop_top.sv" type="file.verilog" enable="1"/>
         <File path="src/test_top.sv" type="file.verilog" enable="1"/>
         <File path="src/top.sv" type="file.verilog" enable="1"/>

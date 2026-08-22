@@ -17,7 +17,6 @@ module top (
     output                              o_uart_tx,
     input                               i_uart_rx
 );
-assign o_gmii_rst_n = i_rst_n;
 
 localparam [47:0] P_LOCAL_MAC   = 48'h0202_DEAD_BEEF;
 localparam [31:0] P_LOCAL_IP    = {8'd192, 8'd168, 8'd1, 8'd210};
@@ -29,7 +28,7 @@ localparam [47:0] P_DST_MAC     = 48'h00e0_4c68_0ffa;//Home PC
 localparam [31:0] P_DST_IP      = {8'd192, 8'd168, 8'd1, 8'd100};
 localparam [15:0] P_DST_PORT    = 16'd8000;
 
-localparam [ 1:0] P_RGMII_MODE  = 2'd2; // 0:10M 1:100M 2:1G
+localparam [ 1:0] P_RGMII_MODE  = 2'd0; // 0:10M 1:100M 2:1G
 localparam        P_USR_CLK     = (P_RGMII_MODE == 2'd0) ? 2_500_000 / 2 :
                                   (P_RGMII_MODE == 2'd1) ? 25_000_000 / 2 :
                                                            125_000_000;
@@ -44,6 +43,16 @@ logic       usr_tx_last, usr_in_tx_last;
 logic [7:0] loop_tx_data;
 logic       loop_tx_wr, loop_tx_last;
 logic       usr_clk;
+
+logic       rst_n;
+assign o_gmii_rst_n = i_rst_n; // 复位输出直接连接输入，boot_rst模块只用于内部逻辑复位
+
+// === BOOT RST ===
+boot_rst boot_rst_m0 (
+    .i_clk      (i_gmii_rx_clk    ),
+    .i_rst_n    (i_rst_n          ),
+    .o_rst_n    (rst_n            )
+);
 
 // === User TX 合并（loop_top 优先于 user_top）===
 assign usr_in_tx_data = loop_tx_wr ? loop_tx_data : usr_tx_data;
@@ -60,7 +69,7 @@ udp_top #(
     .P_DST_PORT   (P_DST_PORT   ),
     .P_RGMII_MODE (P_RGMII_MODE )
 ) udp_top_m0 (
-    .i_rst_n         (i_rst_n         ),
+    .i_rst_n         (rst_n           ),
 
     .i_gmii_rx_clk   (i_gmii_rx_clk   ),   
     .i_gmii_rx_valid (i_gmii_rx_valid ),       
@@ -93,7 +102,7 @@ test_top #(
     .P_UART_BAUD (P_UART_BAUD )
 ) test_top_m0 (
     .i_sys_clk (usr_clk         ),
-    .i_rst_n   (i_rst_n         ),
+    .i_rst_n   (rst_n           ),
     .i_tx_busy (tx_busy         ),
     .o_tx_data (usr_tx_data     ),
     .o_tx_wr   (usr_tx_wr       ),
@@ -105,7 +114,7 @@ test_top #(
 // === LOOP TOP ===
 loop_top loop_top_m0 (
     .i_sys_clk   (usr_clk        ),
-    .i_rst_n     (i_rst_n        ),
+    .i_rst_n     (rst_n          ),
     .i_rx_data   (usr_rx_data    ),
     .i_rx_valid  (usr_rx_valid   ),
     .i_rx_last   (usr_rx_last    ),
